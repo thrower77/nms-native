@@ -1,0 +1,5 @@
+database_url: "postgresql://nms:CHANGE_ME@127.0.0.1:5432/nms"
+log_level: "info"
+http:
+  bind_host: "127.0.0.1"
+  bind_port: 8000

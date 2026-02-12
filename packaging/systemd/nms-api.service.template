@@ -1,0 +1,19 @@
+[Unit]
+Description=NMS API (FastAPI)
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+User=nms
+Group=nms
+WorkingDirectory=/opt/nms/app
+Environment=NMS_CONFIG=/etc/nms/config.yaml
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/nms/venv/bin/uvicorn API_APP_IMPORT --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

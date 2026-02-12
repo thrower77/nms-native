@@ -1,0 +1,20 @@
+[Unit]
+Description=NMS Worker (%i)
+After=network-online.target postgresql.service nms-api.service
+Wants=network-online.target
+
+[Service]
+User=nms
+Group=nms
+WorkingDirectory=/opt/nms/app
+Environment=NMS_CONFIG=/etc/nms/config.yaml
+Environment=SERVICE_ROLE=%i
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/nms/venv/bin/python -m WORKER_MODULE
+Restart=always
+RestartSec=2
+NoNewuh vivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
